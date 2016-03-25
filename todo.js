@@ -1,14 +1,12 @@
-
-
 var todo = angular.module('todoApp', []);
 
 todo.controller( 'TodoCtrl', [
     '$scope',
     function( $scope) {
 
-      $scope.items = [ 
-        {text: "sample item", dueDate: new Date(), completed: false}, 
-        {text: "completed item", dueDate: new Date(), completed: true} 
+      $scope.items = [
+        {text: "sample item", dueDate: new Date(), completed: false},
+        {text: "completed item", dueDate: new Date(), completed: true}
       ];
 
       $scope.text;
@@ -37,6 +35,7 @@ todo.controller( 'TodoCtrl', [
 
 
     $scope.deleteItem = function(index) {
+      console.log("deleting")
       $scope.items.splice(index, 1);
     };
 
@@ -46,15 +45,14 @@ todo.controller( 'TodoCtrl', [
 todo.filter('filterByShowCompleted', function(  ){
   return function( items, showBool ) {
 
-    if( showBool ) { 
-      return items; 
+    if( showBool ) {
+      return items;
     }
 
     var retItems = [];
     angular.forEach( items, function( item ){
-      // If the kitten is playful, keep it!
       if( item.completed === false ){
-        retItems.push( item ); 
+        retItems.push( item );
       }
     });
     return retItems;
