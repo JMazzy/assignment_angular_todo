@@ -4,26 +4,28 @@ todo.controller( 'TodoCtrl', [
   '$scope', 'todoService',
   function( $scope, todoService ) {
 
-    $scope.items = todoService.items;
+    $scope.items = todoService.getItems();
 
-    $scope.text = todoService.text;
-    $scope.dueDate = todoService.dueDate;
-    $scope.showCompleted = todoService.showCompleted;
+    $scope.text;
+    $scope.dueDate;
+    $scope.showCompleted = true;
 
     $scope.newItem = function(text, dueDate) {
       todoService.newItem(text,dueDate)
+      $scope.text = "";
+      $scope.dueDate = "";
     };
 
     $scope.clearCompleted = function() {
       todoService.clearCompleted();
     }
 
-    $scope.toggleCompleted = function(  ) {
-      todoService.toggleCompleted();
-    }
-
     $scope.deleteItem = function(index) {
       todoService.deleteItem(index);
+    };
+
+    $scope.toggleCompleted = function(  ) {
+      $scope.showCompleted = $scope.showCompleted;
     };
   }
 ]);
