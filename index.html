@@ -13,8 +13,12 @@
   <body ng-controller="TodoCtrl">
     <tr>
         <td>{{  item.text }}</td></br>
-        <td>{{  item.dueDate }}</td></br>
-        <td></td></br>
+        <td>{{  item.dueDate | date : "MMM d, yyyy" }}</td></br>
+        <td ng-if="!item.completed">Not Completed. One day this will be a checkbox.</td>
+        <td ng-if="item.completed">{{  item.completed }} </p>
+        </td></br>
     </tr>
   </body>
 </html>
+
+
