@@ -25,7 +25,7 @@ todo.controller( 'TodoCtrl', [
     };
 
     $scope.toggleCompleted = function(  ) {
-      $scope.showCompleted = $scope.showCompleted;
+      $scope.showCompleted = !$scope.showCompleted;
     };
   }
 ]);
