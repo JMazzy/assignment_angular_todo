@@ -26,17 +26,26 @@
         <th>Item</th>
         <th>Due Date</th>
         <th>Completed?</th>
+        <th>Delete Completed Item</th>
       </thead>
       <tbody>
-        <tr ng-repeat="item in items">
+        <tr ng-repeat="item in items | filterByShowCompleted:showCompleted">
             <td>{{ item.text }}</td>
             <td>{{ item.dueDate | date : "MMM d, yyyy" }}</td>
             <td>
               <input type="checkbox" name="completed" ng-model="item.completed">
             </td>
+            <td ng-click="deleteItem($index)">X</td>
         </tr>
       </tbody>
     </table>
+
+    <button ng-click="clearCompleted()">clear all completed items</button>
+
+    <button ng-click="toggleCompleted()">
+      <p ng-if="showCompleted">hide all completed items</p>
+      <p ng-if="!showCompleted">show all completed items</p>
+    </button>
 
   </body>
 </html>
