@@ -1,44 +1,30 @@
 var todo = angular.module('todoApp', []);
 
 todo.controller( 'TodoCtrl', [
-    '$scope',
-    function( $scope) {
+  '$scope', 'todoService',
+  function( $scope, todoService ) {
 
-      $scope.items = [
-        {text: "sample item", dueDate: new Date(), completed: false},
-        {text: "completed item", dueDate: new Date(), completed: true}
-      ];
+    $scope.items = todoService.items;
 
-      $scope.text;
-      $scope.dueDate;
-      $scope.showCompleted = true;
+    $scope.text = todoService.text;
+    $scope.dueDate = todoService.dueDate;
+    $scope.showCompleted = todoService.showCompleted;
 
-      $scope.newItem = function(text, dueDate) {
-        var item = { text: text,
-                        dueDate: dueDate,
-                        completed: false }
-        $scope.items.push(item);
-        console.log( $scope.items )
-        $scope.text = "";
-        $scope.dueDate = "";
-      };
+    $scope.newItem = function(text, dueDate) {
+      todoService.newItem(text,dueDate)
+    };
 
-    $scope.clearCompleted = function(  ) {
-      $scope.items = $scope.items.filter( function(item) {
-        return !item.completed;
-      });
+    $scope.clearCompleted = function() {
+      todoService.clearCompleted();
     }
 
     $scope.toggleCompleted = function(  ) {
-      $scope.showCompleted = !$scope.showCompleted;
+      todoService.toggleCompleted();
     }
 
-
     $scope.deleteItem = function(index) {
-      console.log("deleting")
-      $scope.items.splice(index, 1);
+      todoService.deleteItem(index);
     };
-
   }
 ]);
 
